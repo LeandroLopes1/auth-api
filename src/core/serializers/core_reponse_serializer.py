@@ -1,3 +1,5 @@
+from email import message
+from email.policy import default
 from rest_framework import serializers
 
 from core.serializers.notifications_serializer import NotificationsSerializer

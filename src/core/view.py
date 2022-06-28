@@ -1,6 +1,6 @@
 from pyexpat import model
 from rest_framework import mixins, viewsets, status
-from rest_framework.response import Response
+from .utils import get_response
 
 from core.models.teste_model import TesteModel
 
@@ -16,10 +16,8 @@ class TesteView(mixins.ListModelMixin, viewsets.GenericViewSet):
         return TesteModel.objects.all()
 
     def list(self, request, *args, **kwargs):
-        serializer = self.get_serializer()
-        data = serializer.data
-
-        return Response(
-            data,
-            status.HTTP_200_OK
+        return get_response(
+            content=[],
+            status=status.HTTP_200_OK,
+            timestamp=request.start_time
         )
