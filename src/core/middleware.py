@@ -1,5 +1,4 @@
 from datetime import datetime
-from xml.dom.minidom import TypeInfo
 from django.utils.deprecation import MiddlewareMixin
 
 class TesteMiddleware(MiddlewareMixin):
