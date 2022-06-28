@@ -1,12 +1,13 @@
-from rest_framework.response import Response
+from datetime import datetime
 from rest_framework import status
+from rest_framework.response import Response
 
 def get_response(
-    content=None,
+    content=[],
     status=status.HTTP_204_NO_CONTENT,
-    timestamp=None,
+    timestamp=datetime.now(),
     notifications=None,
-    trace_id=None
+    trace_id=""
     ):
 
     if not notifications:
