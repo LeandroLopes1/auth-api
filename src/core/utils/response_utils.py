@@ -1,7 +1,7 @@
 def get_response(
     request,
     response,
-    ):
+        ):
     notifications = []
 
     if hasattr(request, 'trace'):
@@ -11,7 +11,9 @@ def get_response(
                 'propertyName': getattr(request, 'property_name', "")
             })
 
-    if hasattr(response, 'data') and type(response.data) is dict and 'message' in response.data.keys():
+    if hasattr(
+        response, 'data') and type(
+            response.data) is dict and 'message' in response.data.keys():
         notifications.append({
             'message': response.data.get('message', '')
         })

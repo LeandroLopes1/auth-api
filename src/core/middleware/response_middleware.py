@@ -6,6 +6,7 @@ from ..utils.response_utils import get_response
 from django.utils.deprecation import MiddlewareMixin
 from djangorestframework_camel_case.render import camelize
 
+
 class ResponseMiddleware(MiddlewareMixin):
     def process_request(self, request):
         request.start_time = datetime.now()
@@ -17,8 +18,8 @@ class ResponseMiddleware(MiddlewareMixin):
             if debug:
                 return http.HttpResponse(
                     "<h1>404 Not Found</h1>",
-                    status = 404,
-                    content_type="text/html"
+                    content_type="text/html",
+                    status=404,
                 )
 
             return response
