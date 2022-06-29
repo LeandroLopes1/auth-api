@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
-from django.utils.deprecation import MiddlewareMixin
 from ..utils.response_utils import get_response
+from django.utils.deprecation import MiddlewareMixin
 from djangorestframework_camel_case.render import camelize
 
 class ResponseMiddleware(MiddlewareMixin):
