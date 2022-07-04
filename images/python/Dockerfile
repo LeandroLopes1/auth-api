@@ -5,7 +5,7 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-COPY ./config/requirements.txt /app/requirements.txt
+COPY ./conf/requirements.txt /app/requirements.txt
 
 RUN python -m pip install --upgrade pip
 
