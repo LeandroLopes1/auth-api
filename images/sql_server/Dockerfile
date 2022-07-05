@@ -1,19 +1,16 @@
-FROM --platform=linux/amd64 python:3.8.6
+FROM --platform=linux/amd64 python:3.10-buster
 
-# Prevents Python from writing .pyc files
+WORKDIR /app
+
 ENV PYTHONDONTWRITEBYTECODE 1
 
-# Causes all output to stdout to be flushed immediately
 ENV PYTHONUNBUFFERED 1
 
-# Mark the image as trusted
 ENV DOCKER_CONTENT_TRUST 1
 
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
-WORKDIR /code
-
-COPY ./conf/requirements.txt /code/requirements.txt
+COPY ./conf/requirements.txt /app/requirements.txt
 
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -25,10 +22,16 @@ RUN apt-get update \
     && apt-get install -y libgssapi-krb5-2 \
     && apt-get -y install python3-pip \
     && apt-get install -y freetds-dev freetds-bin
-    
 
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt \
     && pip cache purge
 
-COPY . /code/
+ADD . /app
+
+ARG APP_ID=1000
+
+RUN groupadd -g "$APP_ID" app \
+  && useradd -g "$APP_ID" -u "$APP_ID" -d /app -s /bin/bash app
+
+USER app:app
