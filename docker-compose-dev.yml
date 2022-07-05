@@ -9,6 +9,18 @@ services:
       - ./src:/app
     ports:
       - "8000:8000"
+  
+  nginx:
+    build:
+      context: ./images/nginx
+    image: nginx_sistema_de_autenticacao_auth_api
+    container_name: nginx_sistema_de_autenticacao_container_auth_api
+    volumes:
+      - ./src:/app
+    ports:
+      - 8080:80
+    depends_on:
+      - api
 
   sqlserver: 
     image: "mcr.microsoft.com/mssql/server:2017-latest"
@@ -17,7 +29,6 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "5434:1433"
-
 
 volumes:
   dbdata:
