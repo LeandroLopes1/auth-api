@@ -13,7 +13,7 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 WORKDIR /code
 
-COPY ./config/requirements.txt /code/requirements.txt
+COPY ./conf/requirements.txt /code/requirements.txt
 
 RUN apt-get update \
     && apt-get upgrade -y \
