@@ -1,0 +1,34 @@
+services:
+  api:
+    build:
+      context: ./images/python
+    image: sistema_de_autenticacao_dev_auth_api
+    container_name: sistema_de_autenticacao_dev_container_auth_api
+    command: python /app/manage.py runserver 0:8000
+    volumes:
+      - ./src:/app
+    ports:
+      - "8000:8000"
+  
+  nginx:
+    build:
+      context: ./images/nginx
+    image: nginx_sistema_de_autenticacao_auth_api
+    container_name: nginx_sistema_de_autenticacao_container_auth_api
+    volumes:
+      - ./src:/app
+    ports:
+      - 8080:80
+    depends_on:
+      - api
+
+  sqlserver: 
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5434:1433"
+
+volumes:
+  dbdata:
